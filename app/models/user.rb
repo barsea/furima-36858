@@ -16,6 +16,6 @@ class User < ApplicationRecord
     validates :date_of_birth
   end
 
-  has_many :items
-  has_many :orders
+  # has_many :items # 今後の実装で使う
+  # has_many :orders # 今後の実装で使う
 end
