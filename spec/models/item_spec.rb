@@ -88,12 +88,12 @@ RSpec.describe Item, type: :model do
       it 'priceが範囲外では保存できない' do
         @item.price = '200'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is out of setting range")
+        expect(@item.errors.full_messages).to include('Price is out of setting range')
       end
       it 'priceが半角数字でないと保存できない' do
         @item.price = '５００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is out of setting range")
+        expect(@item.errors.full_messages).to include('Price is out of setting range')
       end
     end
   end
