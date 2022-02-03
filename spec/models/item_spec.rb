@@ -85,8 +85,13 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Days to ship can't be blank")
       end
 
-      it 'priceが範囲外では保存できない' do
+      it 'priceが300未満では保存できない' do
         @item.price = '200'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is out of setting range')
+      end
+      it 'priceが9,999,999より上では保存できない' do
+        @item.price = '10000000'
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is out of setting range')
       end

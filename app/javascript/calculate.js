@@ -4,7 +4,7 @@ function calculate (){
     const calculateTax = Math.floor(price.value / 10);
     const addTaxPrice  = document.getElementById("add-tax-price");
     addTaxPrice.innerHTML = `${calculateTax}`;
-    const calculateProfit = (price.value - calculateTax);
+    const calculateProfit = Math.floor(price.value - calculateTax);
     const profit  = document.getElementById("profit");
     profit.innerHTML = `${calculateProfit}`;
   });
