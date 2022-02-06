@@ -1,9 +1,23 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_item, only: :index
+  before_action :set_item, only: [:index, :create]
   before_action :move_to_index, only: :index
 
   def index
+    @order_address = OrderAddress.new
+  end
+
+  def new
+  end
+
+  def create
+    @order_address = OrderAddress.new(order_params)
+    if @order_address.valid?
+      @order_address.save
+      redirect_to root_path
+    else
+      render :index
+    end
   end
 
   private
@@ -13,6 +27,10 @@ class OrdersController < ApplicationController
   end
 
   def move_to_index
-      redirect_to root_path if current_user == @item.user
+    redirect_to root_path if current_user == @item.user
+  end
+
+  def order_params
+    params.permit(:postal_code, :prefecture_id, :city, :house_number, :building_name, :phone_number, :item_id).merge(user_id: current_user.id)
   end
 end
